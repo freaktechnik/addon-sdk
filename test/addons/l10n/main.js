@@ -101,7 +101,12 @@ exports.testHtmlLocalization = createTest("en-GB", function(assert, loader, done
       self.postMessage([nodes[0].innerHTML,
                         nodes[1].innerHTML,
                         nodes[2].innerHTML,
-                        nodes[3].innerHTML]);
+                        nodes[3].innerHTML,
+                        nodes[4].title,
+                        nodes[4].getAttribute("alt"),
+                        nodes[4].accesskey,
+                        nodes[5].placeholder,
+                        nodes[6].label]);
     },
     onMessage: function (data) {
       assert.equal(
@@ -116,6 +121,14 @@ exports.testHtmlLocalization = createTest("en-GB", function(assert, loader, done
         "Content from .properties is text content; HTML can't be injected."
       );
       assert.equal(data[3], "Yes", "Multiple elements with same data-l10n-id are accepted.");
+      
+      assert.equal(data[4], "Yes", "Title attributes get translated.");
+      assert.equal(data[5], "Yes", "Alt attributes get translated.");
+      assert.equal(data[6], "B", "Accesskey is being translated.");
+      
+      assert.equal(data[7], "Yes", "Form placeholders are translateable.");
+      
+      assert.equal(data[8], "Yes", "Labels of select options and context menus are translateable.");
 
       done();
     }
