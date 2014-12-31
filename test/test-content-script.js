@@ -66,7 +66,7 @@ function createProxyTest(html, callback) {
 
 function createWorker(assert, xrayWindow, contentScript, done) {
   let loader = Loader(module);
-  let Worker = loader.require("sdk/content/worker").Worker;
+  let Worker = loader.require("sdk/deprecated/sync-worker").Worker;
   let worker = Worker({
     window: xrayWindow,
     contentScript: [
@@ -853,4 +853,4 @@ exports["test nsEp for content-script"] = createProxyTest(html, function (helper
 
 });
 
-require("test").run(exports);
+require("sdk/test").run(exports);
